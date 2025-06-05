@@ -29,9 +29,9 @@ form {
 
 /* Título del formulario */
 form::before {
-  content: "Formulario de Inscripción";
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-family: MiFuente;
+  content: "FORMULARIO DE INSCRIPCIÓN";
+  font-size: 40px;
   color: #d00000;
   margin-bottom: 1rem;
   display: block;
@@ -63,6 +63,7 @@ select {
   box-sizing: border-box;
   transition: all 0.3s ease;
   background-color: #f9f9f9;
+  margin-bottom: 5px;
 }
 
 input:focus,
@@ -115,13 +116,21 @@ button[disabled] {
 h3 {
   text-align: center;
   color: #d00000;
-  font-size: 1.7rem;
   margin-top: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .texto{
+  display: flex;
+  flex-direction: column;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+
+.texto p{
+  display: flex;
+  text-align: center;
 }
 
 /* Imagen */
@@ -129,8 +138,6 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 1rem auto;
-  border: 2px dashed #d00000;
   padding: 10px;
   border-radius: 8px;
 }
@@ -168,11 +175,12 @@ fieldset {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   animation: fadeInUp 0.5s ease;
+  margin-top: 1rem;
 }
 
 legend {
   font-weight: bold;
-  color: #d00000;
+  color: #000000;
   padding: 0 10px;
   font-size: 1.1rem;
   text-transform: uppercase;
@@ -194,7 +202,7 @@ legend {
 
 /* Botón de carga estilizado */
 .upload-label {
-  display: inline-block;
+  display: flex;
   padding: 0.8rem 1.5rem;
   background-color: #d00000;
   color: #fff;
@@ -204,6 +212,9 @@ legend {
   transition: background-color 0.3s ease, transform 0.2s ease;
   text-align: center;
   font-size: 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .upload-label:hover {
@@ -227,4 +238,31 @@ option {
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+
+/*Iconos*/
+.evento-card{
+  display: flex;
+  justify-content: center;
+  gap: 5%;
+}
+
+.evento-card img{
+  width: 40px;
+}
+
+.evento-item{
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.final{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

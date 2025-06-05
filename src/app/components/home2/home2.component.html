@@ -1,5 +1,22 @@
+<app-header></app-header>
 <div *ngIf="!enviado; else enviadoMsg">
+
+
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="evento-card">
+      <div class="evento-item">
+        <img src="assets/fecha.svg" alt="Fechas" class="evento-icon" />
+        <strong>Fechas:</strong> 10, 11 y 12 de JULIO
+      </div>
+      <div class="evento-item">
+        <img src="assets/lugar1.svg" alt="Lugar" class="evento-icon" />
+        <strong>Lugar:</strong> Auditorio CCL
+      </div>
+      <div class="evento-item">
+        <img src="assets/precio%20(1).svg" alt="Valor" class="evento-icon" />
+        <strong>Valor:</strong> $10,00
+      </div>
+    </div>
     <!-- Datos personales -->
     <fieldset>
       <legend>Datos Personales</legend>
@@ -7,6 +24,7 @@
       <div class="form-group">
         <input formControlName="cedula" placeholder="Cédula de identidad" />
       </div>
+      <span class="label-text">Nota: La cédula de identidad, nos ayudará a que tu entrada tenga un identificador único, no se aceptaran los formularios que tengan repetida su cédula.</span>
 
       <div class="form-group">
         <input formControlName="nombres" placeholder="Nombres" />
@@ -121,7 +139,7 @@
 </div>
 
 <!-- Mensaje enviado -->
-<ng-template #enviadoMsg>
+<ng-template #enviadoMsg class="final">
   <h3 *ngIf="imagenGeneradaURL">Tu respuesta ha sido enviada. ¡Gracias!</h3>
 
   <div class="texto" *ngIf="imagenGeneradaURL">
@@ -135,5 +153,5 @@
     </div>
   </div>
 
-  <h3 *ngIf="!imagenGeneradaURL">Ya se ha resgistrado este número de cédula, intenta con otro número</h3>
+  <h3 *ngIf="!imagenGeneradaURL">Ya se ha registrado este número de cédula, intenta con otro número</h3>
 </ng-template>

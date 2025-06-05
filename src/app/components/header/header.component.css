@@ -1,0 +1,111 @@
+/* Estilos generales */
+header {
+  top: 0; left: 0; right: 0;
+  padding: 1.5rem 9%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  z-index: 1000;
+  height: 100px;
+}
+
+/* Logo */
+.logo img {
+  height: 175px;
+  cursor: pointer;
+}
+
+.logo2 img{
+  height: 100px;
+}
+
+/* Barra de navegación */
+.nav-bar {
+  display: flex;
+  gap: 40px;
+}
+
+.nav-bar a {
+  font-size: 18px;
+  color: #000000;
+  text-decoration: none;
+  display: flex;
+  font-weight: bold;
+}
+
+.nav-bar a:hover {
+  color: #d00000; /* cambia el color al pasar el mouse */
+}
+
+
+/* Menú desplegable */
+.dropdown-menu {
+  position: absolute;
+  top: 70px;
+  right: 9%;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 25px;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  color: #004270;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Menú hamburguesa para móviles */
+.menu-icon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  header {
+    padding: 1.5rem 5%;
+  }
+
+  .nav-bar {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 1rem 0;
+    gap: 20px;
+    margin-top: 25px;
+  }
+
+  .nav-bar a {
+    display: block;
+    padding: 10px;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-bar.active {
+    display: flex;
+  }
+}
+
+button{
+  color: #fff;
+  padding: 9px 15px;
+  background:rgba(4, 65, 112, 1);
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}

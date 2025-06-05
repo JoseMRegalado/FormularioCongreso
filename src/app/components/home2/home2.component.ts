@@ -215,47 +215,118 @@ export class Home2Component implements OnInit {
       this.archivoSeleccionado = file;
     }
   }
-  async generarImagenConQR(cedula: string, nombres: string, apellidos: string, tallerV: string, tallerS: string) {
+  async generarImagenConQR(
+    cedula: string,
+    nombres: string,
+    apellidos: string,
+    tallerV: string,
+    tallerS: string
+  ) {
     const canvas = document.createElement('canvas');
     canvas.width = 600;
-    canvas.height = 400;
+    canvas.height = 900;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     // Fondo blanco
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = '#000';
-    ctx.font = '20px Arial';
-    ctx.fillText(`Nombre: ${nombres} ${apellidos}`, 30, 50);
-    ctx.fillText(`Taller Viernes: ${tallerV}`, 30, 100);
-    ctx.fillText(`Taller Sábado: ${tallerS}`, 30, 150);
+    // Cargar logos
+    const logo1 = new Image();
+    logo1.src = 'assets/logo.png';
+    logo1.crossOrigin = 'anonymous';
 
-    // Generar QR como imagen y dibujar
+    const logo2 = new Image();
+    logo2.src = 'assets/red.png';
+    logo2.crossOrigin = 'anonymous';
+
+    await new Promise((resolve) => {
+      let loaded = 0;
+      const check = () => {
+        loaded++;
+        if (loaded === 2) resolve(true);
+      };
+      logo1.onload = check;
+      logo2.onload = check;
+    });
+
+    // Logos más grandes (100x100)
+    ctx.drawImage(logo1, 40, 30, 100, 100);
+    ctx.drawImage(logo2, canvas.width - 140, 30, 100, 100);
+
+    // Nombre completo centrado
+    ctx.fillStyle = '#000000';
+    ctx.font = 'bold 32px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${nombres}`, canvas.width / 2, 160);
+    ctx.fillText(`${apellidos}`, canvas.width / 2, 210);
+
+    // Generar QR antes del bloque amarillo y talleres
     const qrDataUrl = await QRCode.toDataURL(cedula);
     const qrImg = new Image();
     qrImg.src = qrDataUrl;
 
-    await new Promise(resolve => {
+    await new Promise((resolve) => {
       qrImg.onload = () => {
-        ctx.drawImage(qrImg, 400, 50, 150, 150);
+        // QR más grande (300x300)
+        ctx.drawImage(qrImg, canvas.width / 2 - 150, 250, 300, 300);
         resolve(true);
       };
     });
 
+    // Bloque amarillo de fechas (después del QR)
+    ctx.fillStyle = '#fef2c0';
+    ctx.fillRect(60, 580, 480, 80);
+
+    ctx.fillStyle = '#000000';
+    ctx.font = '18px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(`Esta entrada es válida desde las 15H00`, canvas.width / 2, 610);
+    ctx.fillText(`hasta 18H00 Jueves 11 y Viernes 12 de Julio`, canvas.width / 2, 640);
+
+    // Mostrar talleres ajustando texto
+    ctx.textAlign = 'left';
+    const wrapText = (text: string, x: number, y: number, maxWidth: number, lineHeight: number, fontSize: number) => {
+      ctx.font = `${fontSize}px Arial`;
+      const words = text.split(' ');
+      let line = '';
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        const testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+          ctx.fillText(line, x, y);
+          line = words[n] + ' ';
+          y += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, x, y);
+      return y + lineHeight;
+    };
+
+    ctx.fillStyle = '#000000';
+    let y = 700;
+    y = wrapText(`Taller Viernes: ${tallerV}`, 60, y, 480, 25, 18);
+    wrapText(`Taller Sábado: ${tallerS}`, 60, y, 480, 25, 18);
+
+    // Guardar y subir
     const dataUrl = canvas.toDataURL('image/png');
     this.imagenGeneradaURL = dataUrl;
     this.descargaLista = true;
 
-    // Subir imagen a Storage
     const filePath = `comprobantes/${cedula}/datos.png`;
     const fileRef = this.storage.ref(filePath);
     const blob = await (await fetch(dataUrl)).blob();
 
     await this.storage.upload(filePath, blob);
   }
+
+
+
 
   descargarImagen() {
     const a = document.createElement('a');

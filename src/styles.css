@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* transition: 2s linear; */
+}
+
+
+
+@font-face {
+  font-family: 'MiFuente';
+  src: url('src/assets/fonts/CHILLER.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+

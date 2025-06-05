@@ -10,6 +10,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import {HomeComponent} from "./components/home/home.component";
 import { Home2Component } from './components/home2/home2.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 const appRoutes: Routes = [
@@ -21,7 +22,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    Home2Component
+    Home2Component,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+
 <div *ngIf="!enviado; else enviadoMsg">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <input formControlName="cedula" placeholder="Cédula de identidad" />

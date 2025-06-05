@@ -1,0 +1,18 @@
+<header>
+  <div class="logo">
+    <img [routerLink]="['/home']" src="./assets/logo.png" alt="Logo">
+  </div>
+
+  <div class="menu-icon" (click)="toggleNav()">☰</div>
+
+  <nav class="nav-bar" [class.active]="menuOpen">
+    <a routerLink="/home2">Inscripción</a>
+    <a href="https://www.instagram.com/la_resistencia_rdj/" target="_blank">Instagram</a>
+    <a routerLink="/requirements">Camiseta</a>
+  </nav>
+
+  <div class="logo2">
+    <img [routerLink]="['/home']" src="./assets/red.png" alt="Logo">
+  </div>
+
+</header>
