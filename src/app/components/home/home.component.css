@@ -1,0 +1,74 @@
+/* Fondo general del formulario */
+form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+  color: #000000;
+}
+
+/* Estilos generales para inputs y selects */
+input,
+select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #d00000;
+}
+
+/* Etiquetas */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+/* Grupos de formulario */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Botón de enviar */
+button[type='submit'] {
+  background-color: #d00000;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type='submit']:hover {
+  background-color: #a00000;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Mensaje de enviado */
+h3 {
+  text-align: center;
+  color: #d00000;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+.mensajeCarga{
+  color: #d00000;
+}

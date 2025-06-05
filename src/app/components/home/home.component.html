@@ -1,0 +1,62 @@
+<div *ngIf="!enviado; else enviadoMsg">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input formControlName="cedula" placeholder="Cédula de identidad" />
+    <input formControlName="nombres" placeholder="Nombres" />
+    <input formControlName="apellidos" placeholder="Apellidos" />
+    <input formControlName="celular" placeholder="Número de celular" />
+    <input formControlName="correo" placeholder="Correo electrónico" type="email" />
+    <input formControlName="direccion" placeholder="Dirección - Barrio" />
+
+    <select formControlName="genero">
+      <option value="">Seleccione género</option>
+      <option value="masculino">Masculino</option>
+      <option value="femenino">Femenino</option>
+    </select>
+
+    <select formControlName="edad">
+      <option value="">Seleccione edad</option>
+      <option value="12 a 14 años">12 a 14 años</option>
+      <option value="15 a 17 años">15 a 17 años</option>
+      <option value="18 a 25 años">18 a 25 años</option>
+      <option value="25 años en adelante">25 años en adelante</option>
+    </select>
+
+    <div *ngIf="cargandoTalleres">
+      <span class="mensajeCarga">Cargando talleres, espere un momento por favor...</span>
+    </div>
+
+    <!-- Talleres - Mostrar solo si hay edad seleccionada -->
+    <div *ngIf="!cargandoTalleres && edadSeleccionada">
+      <!-- Taller Viernes -->
+      <div class="form-group">
+        <label>Taller Viernes</label>
+        <select class="form-control" formControlName="tallerViernes">
+          <option value="">Seleccione un taller</option>
+          <option *ngFor="let taller of talleresDisponiblesViernes" [value]="taller">{{ taller }}</option>
+        </select>
+      </div>
+
+      <!-- Taller Sábado -->
+      <div class="form-group">
+        <label>Taller Sábado</label>
+        <select class="form-control" formControlName="tallerSabado">
+          <option value="">Seleccione un taller</option>
+          <option *ngFor="let taller of talleresDisponiblesSabado" [value]="taller">{{ taller }}</option>
+        </select>
+      </div>
+    </div>
+
+    <input formControlName="iglesia" placeholder="¿A qué iglesia asistes?" />
+
+    <select formControlName="hogar">
+      <option value="Si">Sí</option>
+      <option value="No">No</option>
+    </select>
+
+    <button type="submit" [disabled]="form.invalid">Enviar</button>
+  </form>
+</div>
+
+<ng-template #enviadoMsg>
+  <h3>Tu respuesta ha sido enviada. ¡Gracias!</h3>
+</ng-template>

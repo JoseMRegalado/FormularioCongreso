@@ -1,0 +1,139 @@
+<div *ngIf="!enviado; else enviadoMsg">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <!-- Datos personales -->
+    <fieldset>
+      <legend>Datos Personales</legend>
+
+      <div class="form-group">
+        <input formControlName="cedula" placeholder="Cédula de identidad" />
+      </div>
+
+      <div class="form-group">
+        <input formControlName="nombres" placeholder="Nombres" />
+      </div>
+
+      <div class="form-group">
+        <input formControlName="apellidos" placeholder="Apellidos" />
+      </div>
+
+      <div class="form-group">
+        <input formControlName="celular" placeholder="Número de celular" />
+      </div>
+
+      <div class="form-group">
+        <input formControlName="correo" placeholder="Correo electrónico" type="email" />
+      </div>
+
+      <div class="form-group">
+        <input formControlName="direccion" placeholder="Dirección - Barrio" />
+      </div>
+
+      <div class="form-group">
+        <select formControlName="genero">
+          <option value="">Seleccione género</option>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <select formControlName="edad">
+          <option value="">Seleccione edad</option>
+          <option value="12 a 14 años">12 a 14 años</option>
+          <option value="15 a 17 años">15 a 17 años</option>
+          <option value="18 a 25 años">18 a 25 años</option>
+          <option value="25 años en adelante">25 años en adelante</option>
+        </select>
+      </div>
+
+    </fieldset>
+
+    <!-- Carga talleres -->
+    <div *ngIf="cargandoTalleres" class="mensajeCarga">
+      Cargando talleres, espere un momento por favor...
+    </div>
+
+    <!-- Talleres -->
+    <fieldset *ngIf="!cargandoTalleres && edadSeleccionada">
+      <legend>Inscripción a Talleres</legend>
+
+      <div class="form-group">
+        <label for="tallerViernes">Taller Viernes</label>
+        <select class="form-control" formControlName="tallerViernes">
+          <option value="">Seleccione un taller</option>
+          <option *ngFor="let taller of talleresDisponiblesViernes" [value]="taller">{{ taller }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="tallerSabado">Taller Sábado</label>
+        <select class="form-control" formControlName="tallerSabado">
+          <option value="">Seleccione un taller</option>
+          <option *ngFor="let taller of talleresDisponiblesSabado" [value]="taller">{{ taller }}</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <!-- Iglesia y hogar -->
+    <fieldset>
+      <legend>Otros Datos</legend>
+
+      <div class="form-group">
+        <input formControlName="iglesia" placeholder="¿A qué iglesia asistes?" />
+      </div>
+
+      <div class="form-group">
+        <select formControlName="hogar">
+          <option value="">¿Asistes a un hogar de bendición?</option>
+          <option value="Si">Sí</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <!-- Archivo -->
+    <fieldset>
+      <legend>Comprobante de Inscripción</legend>
+
+      <div class="form-group archivo-subida">
+        <span class="label-text">Sube tu comprobante (PDF, Word o imagen)</span>
+        <label for="comprobante" class="upload-label">
+          <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M12 12v6m0 0l-3-3m3 3l3-3M12 4v8" />
+          </svg>
+          {{ archivoSeleccionado ? 'Archivo cargado' : 'Seleccionar archivo' }}
+        </label>
+        <input
+          id="comprobante"
+          type="file"
+          (change)="onFileSelected($event)"
+          accept=".pdf,.doc,.docx,image/*"
+          class="hidden-input"
+        />
+      </div>
+    </fieldset>
+
+
+    <button type="submit" [disabled]="form.invalid || !archivoSeleccionado || enviando">{{ enviando ? 'Enviando...' : 'Enviar' }}</button>
+  </form>
+</div>
+
+<!-- Mensaje enviado -->
+<ng-template #enviadoMsg>
+  <h3 *ngIf="imagenGeneradaURL">Tu respuesta ha sido enviada. ¡Gracias!</h3>
+
+  <div class="texto" *ngIf="imagenGeneradaURL">
+    <p style="font-weight: bold;">
+      Toma una captura o descarga esta imagen para conservar tu comprobante de inscripción.
+    </p>
+    <img [src]="imagenGeneradaURL" alt="Comprobante QR" />
+    <br />
+    <div class="descarga">
+      <button  *ngIf="descargaLista" (click)="descargarImagen()">Descargar imagen</button>
+    </div>
+  </div>
+
+  <h3 *ngIf="!imagenGeneradaURL">Ya se ha resgistrado este número de cédula, intenta con otro número</h3>
+</ng-template>
