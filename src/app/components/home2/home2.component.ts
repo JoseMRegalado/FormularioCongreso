@@ -22,17 +22,17 @@ export class Home2Component implements OnInit {
   cargandoTalleres = false;
 
   talleresAdolescentes = [
-    'TALLER 1 - LÍMITES Y LIBERTAD',
-    'TALLER 2 - SUEÑOS DE ATRACCIÓN',
-    'TALLER 3 - VÍNCULOS CON POWER',
-    'TALLER 4 - TU DINERO, TUS REGLAS',
+    'Límites y libertad',
+    'Sueños de atracción',
+    'Vínculos con Power',
+    'Tu dinero, tus reglas',
   ];
 
   talleresAdultos = [
-    'TALLER 1 - BATALLAS SILENCIOSAS',
-    'TALLER 2 - LLENO DE SUEÑOS, LLENO DE DEUDAS',
-    'TALLER 3 - EL DESAFIO DEL CARÁCTER',
-    'TALLER 4 - REDEFINIENDO EL AMOR',
+    'Batallas silenciosas',
+    'Lleno de sueños, lleno de deudas',
+    'El desafío del carácter',
+    'Redefiniendo el amor',
   ];
 
 
@@ -199,7 +199,8 @@ export class Home2Component implements OnInit {
       formData.nombres,
       formData.apellidos,
       formData.tallerViernes,
-      formData.tallerSabado
+      formData.tallerSabado,
+      formData.edad
     );
 
   }
@@ -220,11 +221,12 @@ export class Home2Component implements OnInit {
     nombres: string,
     apellidos: string,
     tallerV: string,
-    tallerS: string
+    tallerS: string,
+    edad: string
   ) {
     const canvas = document.createElement('canvas');
     canvas.width = 600;
-    canvas.height = 900;
+    canvas.height = 780;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -276,15 +278,67 @@ export class Home2Component implements OnInit {
       };
     });
 
-    // Bloque amarillo de fechas (después del QR)
-    ctx.fillStyle = '#ffa9a9';
-    ctx.fillRect(60, 580, 480, 80);
+    /* ─────────────── BLOQUE ROJO CON HORARIOS ─────────────── */
 
-    ctx.fillStyle = '#000000';
+// 1. Prepara las líneas según la edad
+    const adolescentes = ['12 a 14 años', '15 a 17 años'];
+    const lineas = adolescentes.includes(edad)
+      ? [
+        'Esta entrada es válida: el Jueves 10 de Julio a partir de las 19H00,',
+        'el Viernes 11 de Julio entre las 15H00 y 19H00,',
+        'el Sábado 12 de Julio entre las 09H30 y las 12H00'
+      ]
+      : [
+        'Esta entrada es válida: el Jueves 10 de Julio a partir de las 19H00,',
+        'el Viernes 11 de Julio entre las 19H00 y 22H00,',
+        'el Sábado 12 de Julio entre las 15H00 y las 21H00'
+      ];
+
+// 2. Configura fuente para medir
     ctx.font = '18px Arial';
+    const lineHeight   = 22;   // misma separación que usarás
+    const paddingX     = 20;   // margen horizontal interno
+    const paddingY     = 10;   // margen vertical interno
+
+// 3. Calcula ancho máximo del texto
+    const maxLineWidth = Math.max(...lineas.map(l => ctx.measureText(l).width));
+
+// 4. Calcula dimensiones y posición del rectángulo
+    const rectWidth  = maxLineWidth + paddingX * 2;
+    const rectHeight = lineHeight * lineas.length + paddingY * 2;
+    const rectX      = (canvas.width - rectWidth) / 2;   // centrado
+    const rectY      = 580;                              // donde lo tenías
+
+// 5. Dibuja el rectángulo rojo
+    ctx.fillStyle = '#ffa9a9';
+    drawRoundedRect(ctx, rectX, rectY, rectWidth, rectHeight, 12); // 12 = radio de borde
+
+
+// 6. Dibuja las líneas dentro del rectángulo
+    ctx.fillStyle = '#000000';
     ctx.textAlign = 'center';
-    ctx.fillText(`Esta entrada es válida desde las 15H00`, canvas.width / 2, 610);
-    ctx.fillText(`hasta 18H00 Jueves 11 y Viernes 12 de Julio`, canvas.width / 2, 640);
+
+    function drawRoundedRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+
+    let yTexto = rectY + (rectHeight - lineHeight * lineas.length) / 2 + lineHeight - 4; // primera línea
+    lineas.forEach(l => {
+      ctx.fillText(l, canvas.width / 2, yTexto);
+      yTexto += lineHeight;
+    });
 
     // Mostrar talleres ajustando texto
     ctx.textAlign = 'left';
@@ -309,7 +363,7 @@ export class Home2Component implements OnInit {
     };
 
     ctx.fillStyle = '#000000';
-    let y = 700;
+    let y = yTexto + 20;
     y = wrapText(`Taller Viernes: ${tallerV}`, 60, y, 480, 25, 18);
     wrapText(`Taller Sábado: ${tallerS}`, 60, y, 480, 25, 18);
 

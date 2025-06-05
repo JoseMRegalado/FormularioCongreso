@@ -116,7 +116,7 @@ button[disabled] {
 h3 {
   text-align: center;
   color: #d00000;
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -269,5 +269,5 @@ option {
 
 .qr{
   height: auto ;
-  width: 50%;
+  width: 400px;
 }
