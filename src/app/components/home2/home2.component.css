@@ -266,3 +266,8 @@ option {
   justify-content: center;
   align-items: center;
 }
+
+.qr{
+  height: auto ;
+  width: 50%;
+}

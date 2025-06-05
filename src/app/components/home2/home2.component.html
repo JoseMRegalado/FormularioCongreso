@@ -146,7 +146,7 @@
     <p style="font-weight: bold;">
       Toma una captura o descarga esta imagen para conservar tu comprobante de inscripción.
     </p>
-    <img [src]="imagenGeneradaURL" alt="Comprobante QR" />
+    <img class="qr" [src]="imagenGeneradaURL" alt="Comprobante QR" />
     <br />
     <div class="descarga">
       <button  *ngIf="descargaLista" (click)="descargarImagen()">Descargar imagen</button>

@@ -277,7 +277,7 @@ export class Home2Component implements OnInit {
     });
 
     // Bloque amarillo de fechas (después del QR)
-    ctx.fillStyle = '#fef2c0';
+    ctx.fillStyle = '#ffa9a9';
     ctx.fillRect(60, 580, 480, 80);
 
     ctx.fillStyle = '#000000';
