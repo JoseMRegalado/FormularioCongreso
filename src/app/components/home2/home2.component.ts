@@ -18,7 +18,7 @@ export class Home2Component implements OnInit {
   edadSeleccionada = '';
   talleresDisponiblesViernes: string[] = [];
   talleresDisponiblesSabado: string[] = [];
-  maximosPorTaller = 2;
+  maximosPorTaller = 40;
   cargandoTalleres = false;
 
   talleresAdolescentes = [
@@ -226,7 +226,7 @@ export class Home2Component implements OnInit {
   ) {
     const canvas = document.createElement('canvas');
     canvas.width = 600;
-    canvas.height = 780;
+    canvas.height = 790;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -255,15 +255,15 @@ export class Home2Component implements OnInit {
     });
 
     // Logos más grandes (100x100)
-    ctx.drawImage(logo1, 40, 30, 100, 100);
-    ctx.drawImage(logo2, canvas.width - 140, 30, 100, 100);
+    ctx.drawImage(logo1, 40, 30, 150, 150);
+    ctx.drawImage(logo2, canvas.width -160, 30, 125, 125);
 
     // Nombre completo centrado
     ctx.fillStyle = '#000000';
     ctx.font = 'bold 32px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText(`${nombres}`, canvas.width / 2, 160);
-    ctx.fillText(`${apellidos}`, canvas.width / 2, 210);
+    ctx.fillText(`${nombres}`, canvas.width / 2, 175);
+    ctx.fillText(`${apellidos}`, canvas.width / 2, 215);
 
     // Generar QR antes del bloque amarillo y talleres
     const qrDataUrl = await QRCode.toDataURL(cedula);
@@ -272,8 +272,13 @@ export class Home2Component implements OnInit {
 
     await new Promise((resolve) => {
       qrImg.onload = () => {
-        // QR más grande (300x300)
-        ctx.drawImage(qrImg, canvas.width / 2 - 150, 250, 300, 300);
+        // QR más grande (65% del canvas) y centrado horizontalmente
+        const porcentaje = 0.65;
+        const qrSize = canvas.width * porcentaje;
+        const x = (canvas.width - qrSize) / 2;
+        const y = 225;// Puedes ajustar la altura si quieres más arriba o abajo
+
+        ctx.drawImage(qrImg, x, y, qrSize, qrSize);
         resolve(true);
       };
     });
@@ -307,7 +312,7 @@ export class Home2Component implements OnInit {
     const rectWidth  = maxLineWidth + paddingX * 2;
     const rectHeight = lineHeight * lineas.length + paddingY * 2;
     const rectX      = (canvas.width - rectWidth) / 2;   // centrado
-    const rectY      = 580;                              // donde lo tenías
+    const rectY      = 590;                              // donde lo tenías
 
 // 5. Dibuja el rectángulo rojo
     ctx.fillStyle = '#ffa9a9';
@@ -363,7 +368,7 @@ export class Home2Component implements OnInit {
     };
 
     ctx.fillStyle = '#000000';
-    let y = yTexto + 20;
+    let y = yTexto + 30;
     y = wrapText(`Taller Viernes: ${tallerV}`, 60, y, 480, 25, 18);
     wrapText(`Taller Sábado: ${tallerS}`, 60, y, 480, 25, 18);
 

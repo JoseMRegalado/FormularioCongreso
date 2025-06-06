@@ -20,6 +20,16 @@ header {
   height: 100px;
 }
 
+@media (max-width: 600px) {
+  .logo img {
+    height: 100px;
+  }
+
+  .logo2 img {
+    height: 80px;
+  }
+}
+
 /* Barra de navegación */
 .nav-bar {
   display: flex;

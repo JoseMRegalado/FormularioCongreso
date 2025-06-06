@@ -33,7 +33,6 @@ form::before {
   content: "FORMULARIO DE INSCRIPCIÓN";
   font-size: 40px;
   color: #d00000;
-  margin-bottom: 1rem;
   display: block;
   text-align: center;
 }
@@ -150,7 +149,7 @@ img {
   }
 
   form::before {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   button {
@@ -164,9 +163,6 @@ img {
     padding: 0.7rem 0.8rem;
   }
 
-  form::before {
-    font-size: 1.3rem;
-  }
 }
 
 fieldset {
@@ -270,4 +266,52 @@ option {
 .qr{
   height: auto ;
   width: 400px;
+}
+
+.versiculo{
+  display: flex;
+  flex-direction: column;
+  font-family: MiFuente;
+}
+
+.versiculo p{
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
+}
+
+.versiculo span{
+  color: #d00000;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.promo{
+  color: #d00000;
+  text-align: center;
+  margin: 0;
+}
+
+.promo h5{
+  margin: 0;
+  font-size: 20px;
+}
+
+@media (max-width: 600px) {
+  .promo h5{
+    font-size: 15px;
+  }
+  .versiculo p {
+    font-size: 14px;
+  }
+
+  .versiculo span{
+    font-size: 14px;
+  }
+
+  span{
+    font-size: 12px;
+  }
+
 }

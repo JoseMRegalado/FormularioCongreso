@@ -3,6 +3,10 @@
 
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="versiculo">
+      <p>La luz brilla en la oscuridad y la oscuridad jamás podrá apagarla</p>
+      <span>Juan 1:5</span>
+    </div>
     <div class="evento-card">
       <div class="evento-item">
         <img src="assets/fecha.svg" alt="Fechas" class="evento-icon" />
@@ -16,6 +20,9 @@
         <img src="assets/precio%20(1).svg" alt="Valor" class="evento-icon" />
         <strong>Valor:</strong> $10,00
       </div>
+    </div>
+    <div class="promo">
+      <h5>PROMOCIÓN 2 X $15 DEL 6 AL 15 DE JULIO</h5>
     </div>
     <!-- Datos personales -->
     <fieldset>
