@@ -1,12 +1,11 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyALbCX2CQthz48Aa6ki4n47MNTpPKhn6Ac",
-    authDomain: "sg-inscripciones.firebaseapp.com",
-    projectId: "sg-inscripciones",
-    storageBucket: "sg-inscripciones.firebasestorage.app",
-    messagingSenderId: "540652495433",
-    appId: "1:540652495433:web:310d9cddfe6fe597c95598",
-    measurementId: "G-29NBE1T86C"
+    apiKey: "AIzaSyAoO70mxvPtlDN0u3m0o6K6BpSahX-vprA",
+    authDomain: "contracultura-ac6fa.firebaseapp.com",
+    projectId: "contracultura-ac6fa",
+    storageBucket: "contracultura-ac6fa.firebasestorage.app",
+    messagingSenderId: "795341531711",
+    appId: "1:795341531711:web:c4cc312e89354f0fac668a"
   }
 };
