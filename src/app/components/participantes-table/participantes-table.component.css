@@ -1,0 +1,182 @@
+/* Animación de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Contenedor principal de la tabla */
+.tabla-container {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  margin: 2rem auto;
+  animation: fadeInUp 0.6s ease;
+  border-top: 8px solid #d00000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #000000;
+}
+
+/* Título */
+.tabla-container h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 1rem;
+  color: #d00000;
+  font-family: MiFuente;
+}
+
+/* Buscador */
+input[type="text"] {
+  padding: 0.9rem 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 22px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  width: 30%;
+  margin-left: 80px;
+}
+
+input[type="text"]:focus {
+  border-color: #d00000;
+  box-shadow: 0 0 0 3px rgba(208, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Tabla */
+table {
+  width: 90%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #d00000;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+td {
+  font-size: 0.95rem;
+}
+
+/* Botón "Ver documento" */
+a {
+  color: #d00000;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #a00000;
+  text-decoration: underline;
+}
+
+/* Paginación */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+.paginacion button {
+  background-color: #d00000;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 40px;
+}
+
+.paginacion button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.paginacion button:hover:not([disabled]) {
+  background-color: #a00000;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tabla-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .tabla-container h2 {
+    font-size: 1.75rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+    margin: 20px;
+  }
+
+  .paginacion {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .paginacion button {
+    width: 100%;
+  }
+}
+
+.comprobante-cell {
+  position: relative;
+  display: inline-block;
+}
+
+.preview-tooltip {
+  display: none;
+  position: fixed;
+  top: 50px;
+  left: 1000px;
+  z-index: 1000;
+  width: 200px;
+  height: 300px;
+  border: 1px solid #ccc;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.comprobante-cell:hover .preview-tooltip {
+  display: block;
+}
+
+.preview-tooltip img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: contain;
+}
+

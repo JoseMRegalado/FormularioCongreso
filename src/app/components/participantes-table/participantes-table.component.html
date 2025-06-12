@@ -1,0 +1,50 @@
+<app-header></app-header>
+<div>
+  <input
+    type="text"
+    placeholder="Buscar por nombre o cédula"
+    [(ngModel)]="terminoBusqueda"
+    (input)="aplicarFiltroYPaginacion()"
+    class="busqueda"
+  />
+</div>
+
+
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>Nombre Completo</th>
+    <th>Cédula</th>
+    <th>Teléfono</th>
+    <th>Taller Viernes</th>
+    <th>Taller Sábado</th>
+    <th>Comprobante</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let r of registrosPagina">
+    <td>{{ r.nombres }} {{ r.apellidos }}</td>
+    <td>{{ r.cedula }}</td>
+    <td>{{ r.celular }}</td>
+    <td>{{ r.tallerViernes }}</td>
+    <td>{{ r.tallerSabado }}</td>
+    <td class="comprobante-cell">
+      <a [href]="r.comprobante" target="_blank">
+        Ver documento
+        <div class="preview-tooltip">
+          <img [src]="r.comprobante | safeUrl" />
+        </div>
+      </a>
+    </td>
+
+  </tr>
+  </tbody>
+</table>
+
+<!-- PAGINACIÓN -->
+<div class="paginacion">
+  <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">Anterior</button>
+  Página {{ paginaActual }} de {{ totalPaginas() }}
+  <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas()">Siguiente</button>
+</div>

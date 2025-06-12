@@ -11,19 +11,24 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import {HomeComponent} from "./components/home/home.component";
 import { Home2Component } from './components/home2/home2.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ParticipantesTableComponent } from './components/participantes-table/participantes-table.component';
+import { SafeUrlPipe } from './safe-url.pipe';
 
 
 const appRoutes: Routes = [
   //{path: 'home', component: HomeComponent},
   {path: '', component: Home2Component},
   {path: 'home2', component: Home2Component},
+  {path: 'abcd', component: ParticipantesTableComponent},
 ];
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     Home2Component,
-    HeaderComponent
+    HeaderComponent,
+    ParticipantesTableComponent,
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule,

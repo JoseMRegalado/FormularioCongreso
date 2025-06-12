@@ -256,6 +256,12 @@ option {
   text-align: center;
 }
 
+.cuenta{
+  width: 400px;
+  height: auto;
+  margin: 0 auto;
+}
+
 .final{
   display: flex;
   flex-direction: column;
@@ -313,5 +319,7 @@ option {
   span{
     font-size: 12px;
   }
+
+
 
 }
