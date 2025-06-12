@@ -22,7 +22,7 @@ export class ParticipantesTableComponent implements OnInit {
   registrosPagina: Registro[] = [];
 
   paginaActual = 1;
-  registrosPorPagina = 40;
+  registrosPorPagina = 10;
   terminoBusqueda = '';
 
   constructor(private afs: AngularFirestore) {}
